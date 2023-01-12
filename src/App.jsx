@@ -28,7 +28,7 @@ function App() {
     }
 
     try {
-      
+      setDisplayImage("")
       setSpinner(true)
       const response = await fetch('https://real-jade-snail-veil.cyclic.app/generateImage', {
         method: 'POST',
