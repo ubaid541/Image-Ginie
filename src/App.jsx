@@ -7,6 +7,12 @@ function App() {
   const [displayImage, setDisplayImage] = useState()
   const [showspinner, setSpinner] = useState(false)
 
+  const handleKeyPress = (e)=>{
+    if(e.key === "Enter"){
+      handleSubmit(e)
+    }
+  }
+
 
   const handleChange = (e) => {
 
@@ -80,7 +86,9 @@ function App() {
             </select>
           </div>
 
-          <button type="submit" style={{background:'#6666ff',outline:'none',color:'#fff'}} onClick={handleSubmit}  className={`btn  my-4 ${showspinner && 'disabled'}`}>Generate</button>
+          <button type="submit" style={{background:'#6666ff',outline:'none',color:'#fff'}} onClick={handleSubmit}
+          onKeyPress={handleKeyPress}
+            className={`btn  my-4 ${showspinner && 'disabled'}`}>Generate</button>
           {displayImage &&
                     <button type="submit" onClick={handleReset}  className="btn btn-dark my-4 ms-5 ">Reset</button>
           }
