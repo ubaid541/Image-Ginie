@@ -6,6 +6,7 @@ function App() {
   const [imageDesc, setImageDesc] = useState('');
   const [displayImage, setDisplayImage] = useState()
   const [showspinner, setSpinner] = useState(false)
+  const [error, setError] = useState()
 
   const handleKeyPress = (e)=>{
     if(e.key === "Enter"){
@@ -29,7 +30,11 @@ function App() {
     e.preventDefault()
 
     if(!imageDesc){
-      alert("Input field cannot be empty")
+      setError("Input field cannot be empty")
+      setTimeout(() => {
+        setError(false)
+      }, 3000)
+      // alert("Input field cannot be empty")
       return
     }
 
@@ -56,7 +61,11 @@ function App() {
           // setImageDesc("")
     
         } catch (error) {
-          alert(error)
+          // alert(error)
+          setError(error)
+          setTimeout(() => {
+            setError(false)
+          }, 3000)
           console.log(error);
         }
     
@@ -78,7 +87,7 @@ function App() {
           </div>
           {/* Size */}
           <div className="form-control">
-            <select className='form-control' value={imageDesc?.size} id="size" onChange={handleChange}>
+            <select className='form-control' value={imageDesc?.size} id="size" onChange={handleChange} required>
               <option >Select Size</option>
               <option value="small">Small</option>
               <option value="medium" >Medium</option>
@@ -94,6 +103,17 @@ function App() {
           }
         </form>
       </div>
+
+      {error && (
+        <>
+        <div className='d-flex flex-column justify-content-center align-items-center mt-4'>
+        <div class="alert alert-danger text-center col-lg-4 col-12" role="alert">
+        {error}
+      </div>
+        </div>
+      </>
+      )
+      }
 
       <div className="row image mb-5">
         <div className="image-container">
